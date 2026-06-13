@@ -10,6 +10,17 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 from sklearn.ensemble import RandomForestClassifier
 import pickle
+from huggingface_hub import hf_hub_download
+
+cl_encoder = hf_hub_download(
+    repo_id="Aleakhya13/cl_encoder_gas_can",
+    filename="cl_encoder_resnet50_wo_str_trail3.pth"
+)
+
+ft_model= hf_hub_download(
+    repo_id="Aleakhya13/cl_encoder_gas_can",
+    filename="finetuned model.pth"
+)
 
 class ContrastiveModel(nn.Module):
     def __init__(self, feature_dim=128):
@@ -116,11 +127,11 @@ if uploaded_file is not None:
 
     # Load models
     encoder = ContrastiveModel().to(device)
-    encoder.load_state_dict(torch.load("cl_encoder_resnet50_wo_str_trail3.pth", map_location=device))
+    encoder.load_state_dict(torch.load(cl_encoder, map_location=device))
     encoder.eval()
 
     classifier = DownstreamClassifier(encoder, num_classes=2).to(device)
-    classifier.load_state_dict(torch.load("finetuned model.pth", map_location=device))
+    classifier.load_state_dict(torch.load(ft_model, map_location=device))
     classifier.eval()
 
     # Grad-CAM
