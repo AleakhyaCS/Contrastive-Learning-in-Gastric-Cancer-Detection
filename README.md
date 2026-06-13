@@ -19,4 +19,6 @@ This repository implements a contrastive learning approach for gastric cancer de
 ## Data Source
 [Download Kaggle Gastric Cancer Histopathology Tissue Image Dataset](https://www.kaggle.com/datasets/orvile/gastric-cancer-histopathology-tissue-image-dataset?resource=download)
 
+
+### Streamlit App Demo
 [Gastric Cancer App Link](https://contrastive-learning-in-gastric-cancer-detection.streamlit.app/)
